@@ -1,0 +1,6 @@
+node_modules/
+*.log
+public/
+*.local
+/package-lock.json
+/YandexInternalRootCA.crt

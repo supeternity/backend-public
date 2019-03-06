@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--
+	NOTES:
+	1. All tokens are represented by '$' sign in the template.
+	2. You can write your code only wherever mentioned.
+	3. All occurrences of existing tokens will be replaced by their appropriate values.
+	4. Blank lines will be removed automatically.
+	5. Remove unnecessary comments before creating your template.
+-->
+<html style="overflow: hidden">
+<head>
+<meta charset="UTF-8">
+<meta name="authoring-tool" content="Adobe_Animate_CC">
+<title>aioRun</title>
+<!-- styles -->
+<style>
+    @font-face {
+        font-family: 'ToyotaDisplay-Bold';
+        src: url('../font/toyotadisplay_bd.woff') format('woff');
+    }
+</style>
+<!-- write your code here -->
+<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+<script src="aioRun.js"></script>
+<script>
+
+// adobe config
+var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+var scale_of_root, slave_width, slave_height;
+var run_it = false;
+
+function init(d) {
+	canvas = document.getElementById("canvas");
+    scale_of_root = d;
+	anim_container = document.getElementById("animation_container");
+	dom_overlay_container = document.getElementById("dom_overlay_container");
+	var comp=AdobeAn.getComposition("2CFFBB6698717544AD5960EC0FCD88FE");
+	var aioAda=comp.getLibrary();
+	handleComplete({},comp);
+    run_it = true;
+}
+function handleComplete(evt,comp) {
+	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
+	var aioAda=comp.getLibrary();
+    slave_width = aioAda.properties.width;
+    slave_height = aioAda.properties.height
+	var ss=comp.getSpriteSheet();
+	exportRoot = new aioAda.toyota_top();
+	stage = new aioAda.Stage(canvas);	
+	//Registers the "tick" event listener.
+	fnStartAnimation = function() {
+		stage.addChild(exportRoot);
+		createjs.Ticker.setFPS(aioAda.properties.fps);
+		createjs.Ticker.addEventListener("tick", stage);
+	}
+    toyota_top_responsive(slave_width, slave_height, stage);
+	AdobeAn.compositionLoaded(aioAda.properties.id);
+	fnStartAnimation();
+}
+function externalStacks(d) {
+    scale_of_root = d;
+    toyota_top_responsive(slave_width, slave_height, stage);
+}
+function toyota_top_responsive(w, h, s) {
+    canvas.width = w * scale_of_root;
+    canvas.height = h * scale_of_root;
+    s.scaleX = scale_of_root;
+    s.scaleY = scale_of_root;
+    s.tickOnUpdate = false;
+    s.update();
+    s.tickOnUpdate = true;
+}
+
+function starter(event) {
+    if ( typeof event.data === "number" ) {
+        run_it ? externalStacks(event.data) : init(event.data);
+	}
+    if ( event.data === "replay" ) {
+        exportRoot.gotoAndPlay(0);
+    }
+}
+if ( window.addEventListener ) {
+    window.addEventListener("message", starter);
+} else {
+    window.attachEvent("onmessage", starter);
+}
+</script>
+<!-- write your code here -->
+</head>
+<body style="margin:0px;">
+	<div id="animation_container" style="background-color:rgba(255, 255, 255, 0.00);" width="293" height="203">
+		<canvas id="canvas" width="293" height="203" style="position: absolute; display: block; background-color:rgba(255, 255, 255, 0.00);"></canvas>
+		<div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:480px; height:203px; position: absolute; left: 0px; top: 0px; display: block;">
+		</div>
+	</div>
+</body>
+</html>

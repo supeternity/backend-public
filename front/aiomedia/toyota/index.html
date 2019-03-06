@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<base href="/">
+	<title>Toyota full-responsive | AIO Rollup</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900&amp;subset=cyrillic" rel="stylesheet">
+	<style type="text/css">
+		html {
+			margin: 0;
+			padding: 0;
+			font-family: 'Roboto', sans-serif;
+		}
+		body {
+			margin: 0;
+			padding: 0;
+			background-image: url('aio_rlp_test.png');
+			font-size: 9pt;
+		}
+		.aio_dummy {
+			width: 100%;
+		}
+		.aio_creative_profile {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: auto;
+		}
+		.aio_creative_profile .white {
+			margin: 13% auto 0 auto;
+			padding: 8% 6.5%;
+			width: 87%;
+			background-color: #fff;
+			box-sizing: border-box;
+		}
+		.aio_creative_profile h1 {
+			margin: 0 0 2.673% 0;
+			color: #000000;
+			font-size: 2em;
+			font-weight: 300;
+		}
+		.aio_creative_profile .aio_cp_cont {
+			display: block;
+			width: 72%;
+			position: relative;
+			margin: 0 0 1.652% 28%;
+			color: #000000;
+			font-size: 1.3em;
+			font-weight: 900;
+		}
+		.aio_creative_profile .aio_cp_cont.first {
+			width: 99.5%;
+			margin: 0 0 7% 0.5%;
+			font-size: 2em;
+			color: #E30613;
+		}
+		.aio_creative_profile .aio_cp_desc {
+			display: inline-block;
+			position: absolute;
+			right: 107%;
+			color: #b7b7b7;
+			text-align: right;
+			font-weight: 400;
+		}
+		.aio_creative_run {
+			margin: 0 auto;
+			padding: 8% 6.5%;
+			width: 87%;
+			background-color: #E30613;
+			background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMzkyIDM5MiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzkyIDM5MjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnN0MHtmaWxsOiNGRkZGRkY7fTwvc3R5bGU+PGc+PHBhdGggY2xhc3M9InN0MCIgZD0iTTY3LjIsNzAuMmMzMy42LTM0LjQsNzguNi01My43LDEyNi43LTU0LjJjNDgtMC42LDkzLjUsMTcuNiwxMjcuOSw1MS4ybC0yMC4yLDAuMmMtNC40LDAuMS03LjgsMy42LTcuOCw4YzAuMSw0LjMsMy42LDcuOCw3LjksNy44aDAuMWwzOS40LTAuNWMyLjEsMCw0LjEtMC45LDUuNi0yLjRjMS40LTEuNSwyLjItMy41LDIuMi01LjZsLTAuNS0zOS40Yy0wLjEtNC40LTMuNi04LTgtNy44Yy00LjQsMC4xLTcuOCwzLjYtNy44LDhsMC4yLDIwLjJDMjk1LjQsMTkuMiwyNDYuMS0wLjYsMTkzLjgsMEMxNDEuNCwwLjcsOTIuNCwyMS42LDU1LjgsNTljLTI2LjIsMjYuOC00NC4xLDYwLjMtNTEuNyw5Ni44Yy03LjQsMzUuNi00LjksNzIuNCw3LjQsMTA2LjZjMS4yLDMuMiw0LjIsNS4zLDcuNCw1LjNjMC45LDAsMS44LTAuMiwyLjYtMC41YzQuMS0xLjQsNi4yLTYsNC44LTEwLjJDMywxOTEuNSwxOC42LDExOS45LDY3LjIsNzAuMnoiLz48cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzgwLjUsMTI5LjhjLTEuNC00LjEtNi02LjItMTAuMi00LjhjLTQuMSwxLjQtNi4yLDYtNC44LDEwLjJjMjMuNSw2NS40LDcuOSwxMzctNDAuNywxODYuN2MtNjkuNCw3MS0xODMuNiw3Mi4zLTI1NC42LDNsMjAuMi0wLjJjNC40LTAuMSw3LjgtMy42LDcuOC04Yy0wLjEtNC4zLTMuNi03LjgtNy45LTcuOGgtMC4xbC0zOS40LDAuNWMtNC40LDAuMS03LjgsMy42LTcuOCw4bDAuNSwzOS40YzAuMSw0LjMsMy42LDcuOCw3LjksNy44aDAuMWM0LjQtMC4xLDcuOC0zLjYsNy44LThsLTAuMi0yMC4yQzk3LjIsMzczLjQsMTQ2LjYsMzkyLDE5NiwzOTJjNTEsMCwxMDEuOC0xOS43LDE0MC4yLTU4LjljMjYuMi0yNi44LDQ0LjEtNjAuMyw1MS43LTk2LjhDMzk1LjMsMjAwLjgsMzkyLjcsMTYzLjksMzgwLjUsMTI5Ljh6Ii8+PC9nPjwvc3ZnPg==);
+			background-repeat: no-repeat;
+			background-size: 12%;
+			background-position: right 6.7% center;
+			color: #ffffff;
+			font-size: 2em;
+			font-weight: 300;
+			box-sizing: border-box;
+		}
+		#console {
+			position: fixed;
+			z-index: 99999999;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			max-height: 50vh;
+			background: rgba(0,0,0,0.9);
+			padding:  8% 6.5%;
+			font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+			color: #00ff7d;
+			font-weight: 400;
+			font-size: 0.9em;
+		}
+		#console .time {
+			color: #656565;
+		}
+		#console.hide {
+			height: 0;
+			padding: 0;
+		}
+		#console #switch_log {
+			position: absolute;
+			top: -120px;
+			left: 0;
+			padding: 0  6.5%;
+			height: 120px;
+			line-height: 120px;
+			vertical-align: middle;
+			background: rgba(0,0,0,0.6);
+		}
+	</style>
+</head>
+<body id="aioDemo">
+<div class="aio_dummy">
+	<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+</div>
+<div class="aio_creative_profile">
+	<div class="white">
+		<h1>Creative</h1>
+		<span class="aio_cp_cont first">TOYOTA</span>
+		<span class="aio_cp_cont"><span class="aio_cp_desc">time</span> 23.03 and long</span>
+		<span class="aio_cp_cont"><span class="aio_cp_desc">format</span> AIO Rollup</span>
+		<span class="aio_cp_cont"><span class="aio_cp_desc">future</span> full iOS responsive</span>
+		<span class="aio_cp_cont"><span class="aio_cp_desc">platform</span> mobile</span>
+	</div>
+	<div class="aio_creative_run" id="aioInitAgain">
+		Run creative again
+	</div>
+</div>
+<div id="console" class="hide" hidden>
+	<div id="switch_log">> console log</div>
+</div>
+
+<script language="JavaScript" src="customSDK/aio.min.js"></script>
+<script type="text/javascript">
+    function aioStart() {
+        AIO.rollupBanner = new AIO.RollupBanner();
+        AIO.showRollupBanner('rollup/teaser/teaser.html', 'rollup/reveal/reveal.html');
+    }
+
+    document.getElementById("aioInitAgain").addEventListener("click", function () {
+        location.reload();
+    });
+</script>
+</body>
+</html>

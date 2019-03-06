@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>aioRun</title>
+<script language="JavaScript" src="../../customSDK/aio.min.js"></script>
+<script>
+	function aioStart(){
+		if(document.getElementById("aiolink")){
+			document.getElementById("aiolink").onclick = function(e){
+				setTimeout(function(){
+					if(window.top.postMessage) {
+						window.top.postMessage("aio_close", "*");
+					}
+				}, 500);
+			}
+		}
+	}
+</script>
+<!-- write your code here -->
+<style>
+	body {
+		position: relative;
+	}
+	@font-face {
+		font-family: 'ToyotaDisplay-Bold';
+		src: url('font/toyotadisplay_bd.woff') format('woff');
+	}
+	@font-face {
+		font-family: 'ToyotaDisplay-Regular';
+		src: url('font/toyotadisplay_rg.woff') format('woff');
+	}
+	@font-face {
+		font-family: 'OpenSans-Regular';
+		src: url('font/OpenSans-Regular.woff') format('woff');
+	}
+	body {
+		overflow:hidden;
+	}
+	#_preload_div_ {
+		position:absolute;
+		margin:auto;
+		top:-100%;bottom:-100%;
+	}
+	#animation_container {
+		width:100%; height:100vh;
+		bottom: 0;
+		background: url('images/loader.jpg') no-repeat center bottom;
+		background-size: cover;
+	}
+	#canvas {
+		bottom: 0;
+	}
+	#aioRollup_animation {
+		display: none;
+		position: absolute;
+		width: calc(100vw / 4);
+		height: calc(100vh / 4);
+		background-color: #ffffff;
+		z-index: 666;
+		background: url('aioRollup.svg') no-repeat center top;
+		background-size: contain;
+		opacity: 1;
+		transition: 0.2s opacity ease-out;
+	}
+	.toyota_branding {
+		position: absolute;
+		top: 0;
+		right: 10%;
+		width: calc(100% / 4);
+		height: calc(100% / 4);
+		z-index: 666;
+		background: #ffffff;
+		transition: 0.2s opacity ease-in;
+	}
+	.tb_TOYOTA {
+		height: auto;
+	}
+	.tb_message {
+		position: absolute;
+		width: 100%;
+		height: auto;
+	}
+	#aioResp_0 {
+		position: absolute;
+		right: 0;
+		top: 0;
+		overflow: hidden;
+		opacity: 1;
+		transition: 0.2s opacity ease-out;
+	}
+	#aiolink {
+		display: block;
+		width: 100%;
+		height: 90%;
+		position: absolute;
+		top: 10%;
+		z-index: 1000;
+	}
+</style>
+<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+<script src="aioRun.js"></script>
+<script>
+
+var aioAda = {}; // aioAda : object for full responsive layout
+var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream; // just OS detector
+	// aioAda.aioCloseWidth = (iOS) ? Math.round(0.1 * screen.width) : (Math.round(0.1 * screen.width) * 2); // aio_rollup_close_banner width
+
+var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+function init() {
+	canvas = document.getElementById("canvas");
+	anim_container = document.getElementById("animation_container");
+	dom_overlay_container = document.getElementById("dom_overlay_container");
+	var comp=AdobeAn.getComposition("7B6CBD67A234F3488145E008774DD399");
+	var lib=comp.getLibrary();
+	var loader = new createjs.LoadQueue(false);
+	loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
+	loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
+	var lib=comp.getLibrary();
+	loader.loadManifest(lib.properties.manifest);
+}
+function handleFileLoad(evt, comp) {
+	var images=comp.getImages();	
+	if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }	
+}
+function handleComplete(evt,comp) {
+	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
+	var lib=comp.getLibrary();
+	var ss=comp.getSpriteSheet();
+	var queue = evt.target;
+	var ssMetadata = lib.ssMetadata;
+	for(i=0; i<ssMetadata.length; i++) {
+		ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+	}
+	var preloaderDiv = document.getElementById("_preload_div_");
+	preloaderDiv.style.display = 'none';
+    canvas.style.display = 'block';
+	canvas.style.opacity = '1';
+	exportRoot = new lib.AIOtoyotaFS();
+	stage = new lib.Stage(canvas);
+	fnStartAnimation = function() {
+		stage.addChild(exportRoot);
+		createjs.Ticker.setFPS(lib.properties.fps);
+		createjs.Ticker.addEventListener("tick", stage);
+	}
+    //Code to support hidpi screens and responsive scaling.
+    var initW = lib.properties.width, initH = lib.properties.height;
+    function makeResponsive() {
+        window.addEventListener('resize', resizeCanvas);
+
+        var scale = 0;
+        resizeCanvas();
+        function resizeCanvas() {
+            var iw= (iOS) ? screen.width : window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            var ih= (iOS) ? screen.height : window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+            var scaleX = iw / initW, scaleY = ih / initH;
+            var fRatio = iw / ih;
+            if (fRatio > 0.4615384615384615) {
+                scale = Math.max(scaleX, scaleY);
+            } else {
+                scale = Math.min(scaleX, scaleY);
+            }
+
+			canvas.width = initW * scale;
+            canvas.height = initH * scale;
+            stage.scaleX = scale;
+            stage.scaleY = scale;
+            stage.tickOnUpdate = false;
+            stage.update();
+            stage.tickOnUpdate = true;
+
+            console.log(scale);
+            if (scale <= 1.2166666666666666) {
+                aioAda.toyotaTop.contentWindow.postMessage(scale, "*");
+			} else {
+                aioAda.toyotaTop.contentWindow.postMessage((scale / (iw / initW)) * scale * 0.8, "*");
+            }
+
+        }
+    }
+    makeResponsive();
+    AdobeAn.compositionLoaded(lib.properties.id);
+    fnStartAnimation();
+}
+
+function starter(event) {
+    if ( event.data === "startAnimation" ) {
+        init();
+        aioAda.rollUpIcon.style.opacity = 0;
+    }
+}
+if ( window.addEventListener ) {
+    window.addEventListener("message", starter);
+} else {
+    window.attachEvent("onmessage", starter);
+}
+</script>
+</head>
+<body style="margin:0px;" id="creative_body">
+	<div id="animation_container">
+		<canvas id="canvas" width="480" height="1036" style="position: absolute; opacity: 0; background-color:rgba(52, 50, 51, 0.00); transition: 0.3s opacity ease-in;"></canvas>
+		<div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:480px; height:1036px; position: absolute; left: 0px; top: 0px; display: none;">
+		</div>
+	</div>
+    <div id='_preload_div_' style='position:absolute; top:0; left:0; bottom: 0; right: 0; height:100%; width: 100%; text-align: center;'>	<span style='display: inline-block; height: 100%; vertical-align: top;'></span>	<img style='vertical-align: middle; max-height: 100%'/></div>
+
+	<!-- aioRollup animation -->
+	<div id="aioRollup_animation"></div>
+	<!-- aioRollup animation -->
+
+	<!-- toyota logo of top -->
+	<div id="tbContain" class="toyota_branding">
+		<div id="tbSlave" class="tb_master">
+			<div id="tbLogo" class="tb_TOYOTA">
+				<img id="tbLogoImage" src="images/toyota.png" width="100%">
+			</div>
+			<div id="tbMessage" class="tb_message">
+				<img id="tbLogoMessage" src="images/message.png" width="100%">
+			</div>
+		</div>
+	</div>
+	<!-- toyota logo of top -->
+
+	<!-- dubious practical canvas responsive -->
+	<iframe id="aioResp_0" src="i_top/aioRun.html" name="aioResponsive_0" width="90%" height="40%" frameborder="0" allowtransparency="true"></iframe>
+	<!-- dubious practical canvas responsive -->
+
+	<!-- AD MAIN LINK -->
+	<a id="aiolink" href="https://www.toyota.ru" target="_blank"></a>
+	<!-- AD MAIN LINK -->
+
+	<!-- this layout script -->
+	<script>
+        aioAda._logo = {};
+        function toyotaResizeHandler() {
+            // logo init
+            aioAda._logo.tytH = document.getElementById('tbLogoImage').offsetHeight / 4.7;
+            aioAda._logo.container = document.getElementById('tbContain');
+            // aioAda._logo.container.style.marginLeft = '-' + aioAda.aioCloseWidth + 'px'; // margin of reveal close
+            aioAda._logo.container.style.paddingTop = aioAda._logo.tytH + 'px';
+            aioAda._logo.message = document.getElementById('tbMessage');
+            aioAda._logo.message.style.bottom = aioAda._logo.tytH + 'px';
+
+            // rollup icon init
+            aioAda.rollUpIcon = document.getElementById('aioRollup_animation');
+            aioAda.rollUpIcon.style.top = aioAda._logo.tytH + 'px';
+            aioAda.rollUpIcon.style.left = aioAda._logo.tytH - 21 + 'px';
+
+            // toyota top message
+			aioAda.toyotaTop = document.getElementById('aioResp_0');
+			aioAda.toyotaTop.style.top = aioAda._logo.tytH + 'px';
+            aioAda.toyotaTop.style.left = aioAda._logo.tytH + 'px';
+
+			(iOS) ? document.getElementById('creative_body').style.width = screen.width + 'px' : ' ';
+			if (anim_container != 'undefined') {
+				(iOS) ? document.getElementById('creative_body').width = screen.width + 'px' : ' ';
+			}
+        }
+        toyotaResizeHandler();
+        window.addEventListener("resize", toyotaResizeHandler);
+	</script>
+</body>
+</html>

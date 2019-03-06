@@ -1,0 +1,19 @@
+{
+  "main.css": "static/css/main.3d9f2b36.css",
+  "main.css.map": "static/css/main.3d9f2b36.css.map",
+  "main.js": "static/js/main.f415af53.js",
+  "main.js.map": "static/js/main.f415af53.js.map",
+  "static/media/arrow-down.svg": "static/media/arrow-down.621fe4c2.svg",
+  "static/media/arrow-up.svg": "static/media/arrow-up.5ab2c6dc.svg",
+  "static/media/backspace.svg": "static/media/backspace.c6f5f55b.svg",
+  "static/media/exchange.svg": "static/media/exchange.48391202.svg",
+  "static/media/fav-has.svg": "static/media/fav-has.56275dd1.svg",
+  "static/media/loader.svg": "static/media/loader.f9437ff9.svg",
+  "static/media/minus.svg": "static/media/minus.d10e8e1c.svg",
+  "static/media/plus.svg": "static/media/plus.9fb9436c.svg",
+  "static/media/popup-call-gray.svg": "static/media/popup-call-gray.f5875eb3.svg",
+  "static/media/popup-call-green.svg": "static/media/popup-call-green.91b10cf3.svg",
+  "static/media/popup-clock.svg": "static/media/popup-clock.b2368c39.svg",
+  "static/media/popup-pin.svg": "static/media/popup-pin.0e00fb8e.svg",
+  "static/media/you_are_here.svg": "static/media/you_are_here.0d7d15f8.svg"
+}

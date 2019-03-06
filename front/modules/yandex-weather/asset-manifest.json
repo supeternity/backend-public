@@ -1,0 +1,17 @@
+{
+  "main.js": "/yandex-weather/static/js/main.6393d32e.chunk.js",
+  "main.js.map": "/yandex-weather/static/js/main.6393d32e.chunk.js.map",
+  "runtime~main.js": "/yandex-weather/static/js/runtime~main.6ae0123f.js",
+  "runtime~main.js.map": "/yandex-weather/static/js/runtime~main.6ae0123f.js.map",
+  "static/js/2.7c412016.chunk.js": "/yandex-weather/static/js/2.7c412016.chunk.js",
+  "static/js/2.7c412016.chunk.js.map": "/yandex-weather/static/js/2.7c412016.chunk.js.map",
+  "index.html": "/yandex-weather/index.html",
+  "precache-manifest.a0b008f75984fce7f7bb80ea07858401.js": "/yandex-weather/precache-manifest.a0b008f75984fce7f7bb80ea07858401.js",
+  "service-worker.js": "/yandex-weather/service-worker.js",
+  "static/media/compass-arrow.svg": "/yandex-weather/static/media/compass-arrow.c4775c3f.svg",
+  "static/media/compass-hud.svg": "/yandex-weather/static/media/compass-hud.d93528ce.svg",
+  "static/media/logo.svg": "/yandex-weather/static/media/logo.a93df23a.svg",
+  "static/media/ptic-sinic.svg": "/yandex-weather/static/media/ptic-sinic.49b2e403.svg",
+  "static/media/settings.svg": "/yandex-weather/static/media/settings.fd663bdb.svg",
+  "static/media/spinner.svg": "/yandex-weather/static/media/spinner.b72186ae.svg"
+}
